@@ -32,18 +32,15 @@ languages = {
 
 def reformat_languages(languages)
   new_hash = {}
-    languages[:oo].each do |language, attribute|
-      if new_hash[language][attribute] == :javascript
-          new_hash[language][attribute] = {style: [:oo, :functional]}
-      else    
-        new_hash[language][attribute] = {style: []} 
-        new_hash[language][attribute][:style] << :oo
+    languages.each do |language_type, attribute|
+      attribute.each do |name, type|
+        if new_hash[name] == nil
+          new_hash[name] = type
+          new_hash[name].merge!({style: [language_type]})
+        else 
+          new_hash[name][:style] << language_type
+        end  
+       end 
       end 
-    end
-    languages[:functional].each do |language, attribute|
-      unless new_hash[language][attribute] == :javascript
-        new_hash[language][attribute] = {style: [:functional]} 
-      end 
-    end  
   new_hash   
 end
