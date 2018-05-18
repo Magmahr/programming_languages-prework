@@ -33,11 +33,10 @@ languages = {
 def reformat_languages(languages)
   new_hash = {}
     languages[:oo].each do |language|
-      new_hash = 
+      new_hash[language] = {style: [:oo]} 
     end
     languages[:functional].each do |language|
-      language[:style] = []
-      language[:style] << :functional
+      new_hash[language] = 
     end  
   new_hash   
 end
